@@ -149,7 +149,7 @@ HOOK_HANDLER(hook_preunsub_closed)
 HOOK_HANDLER(hook_preunsub_confirm)
 {
     const char *unsubscribemode;
-    const char *fromaddy, *listname;
+    const char *fromaddy;
 
     if (LMAPI->get_bool("adminmode"))
         return HOOK_RESULT_OK;
@@ -162,7 +162,6 @@ HOOK_HANDLER(hook_preunsub_confirm)
 
     /* Get our data */
     fromaddy = LMAPI->get_string("subscribe-me");
-    listname = LMAPI->get_string("list");
 
     /* Check mode equal to confirm, or the addresses not matching */
     if ((strcasecmp(unsubscribemode,"confirm") == 0) ||

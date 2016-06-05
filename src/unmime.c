@@ -45,7 +45,7 @@ int read_mime_line(char *buf, int size, FILE *stream, int inbody)
 					ungetc_file(a_char, stream);
 				}
 				/* If this line is not blank and the next char is not whitespace then terminate the line */
-				if (i == 0 || a_char != ' ' && a_char != '\t') {
+				if (i == 0 || (a_char != ' ' && a_char != '\t')) {
 					if (i < size) {
 						buf[i++] = '\n';
 					}
@@ -371,7 +371,7 @@ MIME_HANDLER(mimehandle_multipart_default)
     char templine[BIG_BUF];
     const char *bound;
     struct mime_field *field;
-    int done=0, readlast, firstcont, loop2;
+    int done=0, readlast, loop2;
     int firstfile;
     char overridetype[BIG_BUF];
     int override;
@@ -386,7 +386,6 @@ MIME_HANDLER(mimehandle_multipart_default)
 
     bound = mime_parameter(header,"content-type","boundary");
 
-    firstcont = 1;
 
     while (loop2 ? !done : read_file(templine, sizeof(templine), infile) && !done) {
         struct mime_header *subheader;
@@ -460,7 +459,7 @@ MIME_HANDLER(mimehandle_multipart_default)
             char subfilename[BIG_BUF];
             int coding;
             int donechunk;
-            int haveread, havewritten;
+            int havewritten;
             struct mime_handler *handler;
 
             coding = 0;
@@ -487,7 +486,7 @@ MIME_HANDLER(mimehandle_multipart_default)
                 while(read_file(templine, sizeof(templine), infile) && !donechunk) {
                     if (strlen(templine) > 3 ? strncasecmp(&templine[2],
                                 bound, strlen(bound)) == 0 : 0) {
-                        donechunk = 1; haveread = 1; havewritten = 0;
+                        donechunk = 1; havewritten = 0;
                     }
                 }
 
@@ -506,7 +505,6 @@ MIME_HANDLER(mimehandle_multipart_default)
                         else coding = 0;
                 }
 
-                haveread = 0;         
 
                 switch(coding) {
                     case 0: 
@@ -516,7 +514,7 @@ MIME_HANDLER(mimehandle_multipart_default)
                                     : 0) {
                                 donechunk = 1;
                             } else write_file(outfile,"%s",templine);
-                            haveread = 1;
+
                         }
                         close_file(outfile);
                         handler->handler(subheader,subfilename);
