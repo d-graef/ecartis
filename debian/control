@@ -1,26 +1,29 @@
-Source: ecartis
+Package: Ecartis
+Version: 1.0.2
 Section: mail
 Priority: extra
-Maintainer: John Goerzen <jgoerzen@complete.org>
-Standards-Version: 2.4.0.0
-
-Package: ecartis
 Architecture: any
-Depends: ${shlibs:Depends}, sendmail | mail-transport-agent
+Depends: libc6 (>= 2.3.5-1), exim4 | mail-transport-agent, logrotate
 Suggests: ecartis-cgi
-Description: Fast, Flexible Mailing List Manager (UNOFFICIAL CVS BUILD)
- This is a custom-built package from the Ecartis CVS tree.  This is
- not to be uploaded to Debian and is not part of the Debian distribution.
- .
+Conflicts: listar, listar-cgi
+Source: https://github.com/d-graef/ecartis/archive/master.zip
+Maintainer:
+Installed-Size: 1024
+Homepage: https://ecartis.net/
+Description: Fast, Flexible Mailing List Manager
  Ecartis is a powerful mailing list manager in the tradition of listserv
- but with an open architecture and free source (Artistic license).  It
- has some features not found in Majordomo.  One of the most interesting
+ but with an open architecture and open source (GPL license). It
+ has some features not found in Majordomo. One of the most interesting
  things in Ecartis is plugin module system; many functions are
  implemented as dynamically-loadable modules.
  .
+ This is a custom-built package from the Ecartis github.com repository. This is
+ not to be uploaded to Debian and is not part of the Debian distribution.
+ GitHub repository: https://github.com/d-graef/ecartis
+ .
  You may also want to check out the ecartis-cgi program, which provides
  a web-based front-end for your Ecartis mailing lists.
-
+ 
 Package: ecartis-cgi
 Architecture: any
 Depends: ecartis (=${Source-Version}), apache | httpd
