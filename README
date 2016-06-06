@@ -1,16 +1,12 @@
 README file for Ecartis
 -----------------------------------------------------------------------
 For now, this file assumes you have a modicum of unix experience, it will
-get better over time.  If you have questions about getting this code set
-up and installed on your machine, please feel free to subscribe to the
-ecartis-support@ecartis.org (send an email to
-ecartis-support-request@ecartis.org with the word 'subscribe' (no quotes) in
-the subject). 
+get better over time.
 
 Edit the top level makefile to set up configuration settings for your
-machine.  I'm assuming some type of advanced makefile (ala GNU)
+machine. I'm assuming some type of advanced makefile (ala GNU)
 
-After editing, perform a make in the top level.  This will create the
+After editing, perform a make in the top level. This will create the
 modules and the ecartis executable.
 
 You probably want to create a ecartis user/group so that the program runs
@@ -46,7 +42,7 @@ sendmail-style aliases. Thus, you can do:
 
 /home/ecartis/ecartis -newlist mylist >> ecartis.aliases
 
-And the aliases will be in that textfile.  Once you have the aliases in a
+And the aliases will be in that textfile. Once you have the aliases in a
 valid alias file for your mailserver, run newaliases (or your equivalent)
 and it should be ready.
 
@@ -96,26 +92,14 @@ This should be sufficient to make ecartis work with your MTA.
 
 You *should* now have an operational ecartis mailing list server.
 
-Please report any bugs to bugs@ecartis.org so that they can be fixed as
-soon as possible.  Posts to this address will automatically go into the
-Ecartis bug tracking system (http://bugs.ecartis.org/ecartis/).
-
 Please also feel free to submit changes, enhancements, and ideas for
-ecartis as well.  Feature requests can be mailed to bugs@ecartis.org for
-addition to the 'Wishlist' section of the Ecartis database.  Please note
-that it is a feature request in the message, though.  (Ideally, put
-SUGGESTION: or REQUEST: at the beginning of the subject line.)
-
-In addition to ecartis-support@ecartis.org (open subscription via
-ecartis-support-request@ecartis.org), there is also be an open mailing list
-for developers called ecartis-dev@ecartis.org (subscribe via
-ecartis-dev-request@ecartis.org) which can be used to discuss changes and
-implementations of various modules, extensions to existing modules, bug
-fixes and the like. 
+ecartis as well.
 
 Thank you.
 Rachel Blackman  (Sparks)
 Joseph Traub     (JT)
+
+Homepage: https://ecartis.net/
 
 -----------------------------------------------------------------------
 As the authors, we'd really like to know about any improvements, fixes,
