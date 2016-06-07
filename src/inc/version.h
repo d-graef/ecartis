@@ -2,7 +2,7 @@
 #define _VERSION_H
 
 #define LISTAR_VERSION "1.0.0"
-#define ECARTIS_VERSION "1.0.0"
+#define ECARTIS_VERSION "1.0.2"
 #define VER_PRODUCTVERSION_STR LISTAR_VERSION
 
 #endif /* _VERSION_H */
