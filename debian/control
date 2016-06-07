@@ -7,7 +7,7 @@ Depends: libc6 (>= 2.3.5-1), exim4 | mail-transport-agent, logrotate
 Suggests: ecartis-cgi
 Conflicts: listar, listar-cgi
 Source: https://github.com/d-graef/ecartis/archive/master.zip
-Maintainer:
+Maintainer: detlef.graef@yahoo.de
 Installed-Size: 1024
 Homepage: https://ecartis.net/
 Description: Fast, Flexible Mailing List Manager
