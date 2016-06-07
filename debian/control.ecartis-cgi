@@ -1,0 +1,14 @@
+Package: Ecartis-cgi
+Version: 1.0.2
+Section: mail
+Priority: extra
+Architecture: any
+Depends: ecartis (=${Source-Version}), apache | httpd
+Conflicts: listar, listar-cgi
+Source: https://github.com/d-graef/ecartis/archive/master.zip
+Maintainer:
+Installed-Size: 256
+Homepage: https://ecartis.net/
+Description: CGI front-end for Ecartis (UNOFFICIAL CVS BUILD)
+ This is the experimental web-based front-end for the Ecartis
+ mailing list management program.
