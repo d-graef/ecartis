@@ -1,0 +1,21 @@
+Listar's History
+
+
+The original author of what was later to be called Ecartis, Rachel Blackman, was tired of having to hack her way around problems in Majordomo and decided, mostly out of curiousity to see if it would work, to create a mailing list package that was based around a simple SMTP library she wrote. Much of what was then called Listar was inspired by L-Soft's Listserv, which Rachel had administered mailing lists under. She wanted something with Listserv's power, but that wasn't quite as complex.
+
+The first revisions of Listar were pretty minimal; not much more than a fancy replacement for sendmail aliases with a 'subscribe' and 'unsubscribe' command. Then she decided she'd been going at it wrong - while fairly early in development - and ripped out the 'guts' of the program, rewriting it as an entirely modular system, where everything was defined in code at runtime. She also devised and wrote a 'cookie' system which ensured that it was more or less impossible to fake an administrative request unless the spoofer had control over either the machine Listar ran on, or the mailbox of the administrator (in either case, you have problems other than someone spoofing administrative commands to a mailing list). Suddenly, Listar had some interesting possibilities.
+
+Rachel began to run several mailing lists off of Listar in November of 1997; mostly low-traffic lists, including one she invited friends to join which was devoted to discussing ideas for Listar development. From that initial base and feedback from friends, Listar began to mature into a real package. In January of 1998, Rachel's friend JT Traub became interested in Listar as more than just 'one of Rachel's projects' and joined the Listar development team as a second developer.
+
+Though much of the 'core' of Listar is Rachel's code (or derived from it), JT made a fairly major change to Listar's code by adding support for dynamic modules. Coupled with the already modular nature of Listar, this allowed functionality to be split out into actual discrete 'modules' which could be dynamically loaded as needed.
+
+Many of the Listar-related resources were lost - including the original support mailing lists AND the CVS archive, though all code was recovered - when Nausicaa.net was cracked into and the hard drive destroyed in late 1998.
+
+In the summer of 2000, Rachel and JT transitioned the organization of Listar to a -core team, who will handle the organization of the project as we head to a 1.0 release. (more on that later). In 2001, due to a naming conflict with another pre-existing software package, Listar was renamed "Ecartis".
+
+Ecartis' versioning system - as of this writing - remains 'alpha' for two reasons: historical (Rachel once joked that Listar would never actually be 'released', back when she set up the first lists), and as an indication that though the code may reach release stability, the authors consider it a perpetual alpha. There's always something more that can be done! :)
+
+Listar was originally under the OpenSource Artistic License up until release 0.121a, but 0.122a and all Ecartis snapshots/releases are under the GNU Public License (GPL).
+
+The core developers can be reached at ecartis-dev@ecartis.net. Outside user code submissions are welcomed, as well. We would love it if other people felt interested enough in this project to contribute code or documentation or anything. :) 
+
