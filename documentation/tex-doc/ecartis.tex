@@ -2,6 +2,7 @@
 \usepackage{ecartis}
 \usepackage{hthtml}
 \usepackage{verbatim}
+\usepackage{longtable}
 
 \begin{document}
 
@@ -18,6 +19,8 @@
 	\item[2002-04-29] Rewrite from Listar docs to Ecartis docs; added
                       paragraph to Introduction about name change from Listar
                       to Ecartis
+	\item[2016-07-04] Changed Domain name. ecartis.org -\textgreater  ecartis.net
+	\item[2016-07-04] Added appendix A - Config Variables
 \end{description}
 
 \chapter{Notes About This Document}
@@ -1045,4 +1048,937 @@ Instructions on how to write a Ecartis module.
 \chapter{Config Variables}
 \label{config}
 
+\textbf{Ecartis 1.0.2 Variable Reference}
+
+
+Note: The 'valid' field describes the Ecartis config files where that variable is valid.
+'G' means the global config file, 'V' means a virtual host configuration file, and 'L'
+means individual list files.
+
+ACCOUNT MANAGEMENT
+
+\begin{longtable}{p{30mm}llp{60mm}}
+\hline
+Variable & Type & Valid & Description\\
+\hline
+allow-setaddy & boolean & GVL & Allow the use of the setaddy command to replace the subscribed
+address. Example: allow-setaddy=no
+
+Default value is true\\
+\hline
+\multicolumn{4}{l}{ADDRESS HANDLING} \\
+
+\hline
+Variable & Type & Valid & Description\\
+\hline
+deny-822-bounce & boolean & GVL & Should the RFC822 Resent-From: header be trusted for sender.
+Example: deny-822-bounce = yes
+Default value is false\\
+\hline
+deny-822-from & boolean & GVL & Should the RFC822 From: header be trusted for sender.
+Example: deny-822-from = no
+
+Default value is false \\
+\hline
+\multicolumn{4}{l}{ADDRESSES}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+administrivia-address & string & GVL & Address to which subscription/unsubscription attempt notifications should be sent.
+Example: administrivia-address = mylist-admins@host.dom\\
+\hline
+approved-address & string & GVL & Address to which approved/rejected/modified moderated posts should be sent.
+Example: approved-address = mylist-repost@myhost.dom Default value is \textless\$list\textgreater-repost@\textless\$hostname\textgreater\\
+\hline
+listserver-address & string & GV & The email address for the listserver control account.
+Example: listserver-address = listserv@myhost.dom
+
+Default value is ecartis@localhost\\
+\hline
+listserver-admin & string & GV & The email address of the human in charge of the listserver.
+Example: listserver-admin = user1@host2.dom
+
+Default value is root@localhost\\
+\hline
+listserver-full-name & string & GV & The friendly name used to identify the listserver.
+Example: listserver-full-name = List Server
+
+Default value is Ecartis \\
+\hline
+\multicolumn{4}{l}{ADMINISTRATION}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+admin-actions-shown & boolean & GVL & Are administrator actions shown to list subscribers (i.e. subscribe/unsubscribe
+show the administrator email address if actions are shown) Example: admin-actions-shown = no Default value is true\\
+\hline
+paranoia & boolean & GVL & Are the various list config files allowed to be edited remotely for this list.
+Example: paranoia = yes
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{ADMINISTRIVIA}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+administrivia-body-lines & boolean & GVL & Are administrator actions shown to list subscribers (i.e. subscribe/unsubscribe
+show the administrator email address if actions are shown) Example: admin-actions-shown = no
+
+Default value is true\\
+\hline
+administrivia-check & boolean & GVL & Are the various list config files allowed to be edited remotely for this list.
+Example: paranoia = yes
+
+Default value is false\\
+\hline
+administrivia-regexp-file & boolean & GVL & Are the various list config files allowed to be edited remotely for this list.
+Example: paranoia = yes
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{ANTISPAM}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+allow-spam & boolean & GVL & Should we disable the antispam check for this list.
+Example: allow-spam = false
+
+Default value is false\\
+\hline
+antispam-blackhole & boolean & GVL & If we receive spam, should we simply eat it? (If 'no', then it is moderated.)
+Example: antispam-blackhole = yes
+
+Default value is false\\
+\hline
+spamfile & string & GVL & The file on disk which contains the regular expressions used to detect if a given sender is a spammer.
+Example: spamfile = spam-regexp
+
+Default value is spam-regexp\\
+
+\hline
+\multicolumn{4}{l}{BASIC CONFIGURATION}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+advertise & boolean & GVL & Does this list show up as being available.
+Example: advertise = false
+
+Default value is true\\
+\hline
+config-file & string & GV & The name of the list-specific configuration file.
+Example: config-file = config
+
+Default value is config\\
+\hline
+default-flags & string & GVL &Default flags given to a user when they are subscribed.
+Example: default-flags = $\mid$NOPOST$\mid$DIGEST$\mid$
+
+Default value is $\mid$ECHOPOST$\mid$\\
+\hline
+description & string & GVL & Description of the list.
+Example: description = This is my special list\\
+\hline
+hostname & string & GV & Hostname for URLs/addresses/headers
+Example: hostname = lists.mydomain.com\\
+\hline
+ignore-subject-commands & boolean & GV & Should the server ignore commands in the subject line.
+Example: ignore-subject-commands = false
+
+Default value is false\\
+\hline
+list-owner & string & GVL & Defines an email address to reach the list owner(s).
+Example: list-owner = list2-admins@hostname.dom\\
+\hline
+reply-to & string & GVL & Address which will appear in the Reply-To: header.
+Example: reply-to = list@myhost.dom\\
+\hline
+subject-tag & string & GVL & Optional tag to be included in subject lines of posts sent to the list.
+Example: subject-tag = [MyList]\\
+\hline
+task-no-footer & boolean & GVL & Should the messages produced by the server have a footer with version information
+Example: task-no-footer = yes
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{BOUNCE HANDLING}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+bounce-always-unsub & boolean & GVL & Should the user be unsubscribed when more than max transient bounces have occured.
+Example: bounce-always-unsub = false
+
+Default value is false\\
+\hline
+bounce-max-fatal & integer & GVL & Maximum number of fatal bounces before action is taken.
+Example: bounce-max-fatal = 10
+
+Default value is 10\\
+\hline
+bounce-max-transient & integer & GVL & Maximum number of transient bounces before action is taken.
+Example: bounce-max-transient = 100
+
+Default value is 30\\
+\hline
+bounce-never-unsub & boolean & GVL & Should the user be unsubscribed when more than max fatal bounces have occured, or just set vacation.
+Example: bounce-never-unsub = off
+
+Default value is false\\
+\hline
+bounce-never-vacation & boolean & GVL & Should the user ever be set vacation for exceeding the maximum number of bounces.
+Example: bounce-never-vacation = yes
+
+Default value is false\\
+\hline
+bounce-timeout-days & integer & GVL & Length of time (in days) during which the maximum number of bounces must not be exceeded.
+Example: bounce-timeout-days = 7
+
+Default value is 7\\
+\hline
+bouncer-unsub-file & string & GVL & File under the list directory to send to a user when they are automatically unsubscribed by the bouncer.
+Example:  bouncer-unsub-file = text/bounce-unsub.txt
+
+Default value is text/bounce-unsub.txt\\
+\hline
+bouncer-vacation-file & string & GVL & File under the list directory to send to a user when they are automatically set vacation by the bouncer.
+Example:  bouncer-vacation-file = text/bounce-vacation.txt
+
+Default value is text/bounce-vacation.txt\\
+\hline
+\multicolumn{4}{l}{CGI}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+cgi-template-dir & string & GVL & Directory for CGI gateway templates.
+Example:  cgi-template-dir = \textless\$listserver-data\textgreater/templates
+
+Default value is \textless\$listserver-data\textgreater/templates\\
+\hline
+lsg2-cgi-url & string & GV & URL on the associated web server pointing to the LSG/2 cgi wrapper.
+Example:  lsg2-cgi-url = http://my.dom/cgi-bin/lsg2.cgi\\
+\hline
+lsg2-cookie-duration & duration & GV & The length of time that cookies for the LSG/2 web form should last.
+Example: lsg2-cookie-duration = 30 m
+
+Default value is 15 m\\
+\hline
+lsg2-iis-support & boolean & G & Does LSG/2 need to run in Microsoft IIS-compatible mode? (Likely breaks other webservers.)
+Example:  lg2-iis-support = yes
+
+Default value is false\\
+\hline
+lsg2-paranoia & boolean & GV & Is LSG/2 paranoid, e.g. does it deny all remote administration.
+Example: lsg2-paranoia = no
+
+Default value is false\\
+\hline
+lsg2-sort-userlist & boolean & GVL & Should LSG/2 sort the userlist in admin mode. This can be expensive for large lists.
+Example:  lsg2-sort-userlist = true
+
+Default value is true\\
+\hline
+\multicolumn{4}{l}{COOKIES}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+expire-all-cookies & boolean & GV & Should we expire cookies for all lists on initial run? Should only be set to 'no'
+on installations with a huge (multi-thousand) number of lists.
+Example: expire-all-cookies = yes
+
+Default value is true\\
+\hline
+\multicolumn{4}{l}{DEBUGGING}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+debug & integer & GVL & How much logging should be done.
+Example: debug = 10
+
+Default value is 0\\
+\hline
+logfile & integer & GV & Filename where debugging log information will be stored.
+Example:  logfile = ./server.log\\
+\hline
+preserve-queue & boolean & GVL & Controls whether to remove queue file after processing.
+Example:  preserve-queue = yes
+
+Default value is false\\
+\hline
+validate-users & boolean & GVL & Perform a minimal validation of user@host.dom on all users
+in the list's user file and log errors. Example:   validate-users = true
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{DIGEST}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+digest-administrivia-file & string & GVL & File on disk used to store digest administrative information.
+Example:  digest-administrivia-file = digest/administrivia
+
+Default value is digest/administrivia\\
+\hline
+digest-alter-datestamp & boolean & GVL & Should digests use a different datestamp format.
+Example:  digest-alter-datestamp = on
+
+Default value is false\\
+\hline
+digest-altertoc & boolean & GVL & Should this list use an alternate form for the digest Table of Contents.
+Example:  digest-altertoc = false
+
+Default value is false\\
+\hline
+digest-footer-file & string & GVL & Filename for a footer file automatically included with every digest
+Example:  digest-footer-file = text/digest-footer.txt
+
+Default value is text/digest-footer.txt\\
+\hline
+digest-from & string & GVL & Email address used as the From: header when the digest is distributed.
+Example: digest-from = listname@host.dom\\
+\hline
+digest-header-file & string & GVL & Filename for a header file automatically included with every digest
+Example:  digest-header-file = text/digest-header.txt
+
+Default value is text/digest-header.txt\\
+\hline
+digest-max-size & integer & GVL & Maximum size a digest can reach before being automatically sent.
+Example:  digest-max-size = 40000
+
+Default value is 0\\
+\hline
+digest-max-time & duration & GVL & Maximum age of a digest before it is sent automatically.
+Example: digest-max-time = 24h
+
+Default value is 0s\\
+\hline
+digest-name & string & GVL & If digests are kept, what do we use as the name template for the stored copy of the digest.
+Example:
+  digest-name = digests/\%l/V\%V.I\%i\\
+\hline
+digest-no-fork & boolean & GVL & Should digesting be done by forking a seperate process.
+Example:  digest-no-fork = true
+
+Default value is false\\
+\hline
+digest-no-toc & boolean & GVL &S Should digests exclude the Table of Contents entirely.
+Example:  digest-no-toc = TRUE
+
+Default value is false\\
+\hline
+digest-no-unmime & boolean & GVL & Should posts in the digest not be unmimed.
+Example:  digest-no-unmime = off
+
+Default value is false\\
+\hline
+digest-send-mode & choice & GVL & Mode used when sending digests daily via a timed job (usually around midnight
+of the host machine's time). 'procdigest' means that when that happens, the digest will be sent regardless of
+your time and size settings (which are still honored for normal posts). Time and size are self-explanatory;
+time means that it will only send if there's been more than digest-max-time elapsed, while size will only
+send if digest-max-size has been exceeded. digest-max-size and digest-max-time DO still apply when individual
+posts come across the list, even if procdigest is set; having digest-max-size set to 50000 and this variable
+to procdigest would mean that the digest would be sent when it exceeded 50k, or during the midnight automated
+run (perhaps the day's digest only reached 20k; it would still be sent).
+Example:  digest-send-mode = time
+
+Default value is procdigest\\
+\hline
+digest-strip-tags & boolean & GVL & Should subject lines of the messages in the digest have the list subject-tag stripped.
+Example:  digest-strip-tags = on
+
+Default value is false\\
+\hline
+digest-to & string & GVL & Email addres used as the To: header when the digest is distributed.
+Example:  digest-to = listname@host.dom\\
+\hline
+digest-transient & boolean & GVL & Are digests removed completely after they are sent.
+Example:  digest-transient = off
+
+Default value is true\\
+\hline
+digest-transient-administrivia & boolean & GVL & Should the digest administrivia file be removed after the digest is next sent.
+Example:  digest-transient-administrivia = true
+
+Default value is false\\
+\hline
+no-digest & boolean & GVL & Should digesting be disabled for this list.
+Example:  no-digest = yes
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{DUPLICATE MESSAGE DETECTION}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+no-dupes & boolean & GVL & Should we track the Message-Id headers from incoming traffic to prevent duplicate posts to the list. Message-Id's expire after 1 day.
+Example:  no-dupes = off
+
+Default value is true\\
+\hline
+no-dupes-forever & boolean & GVL & Should we never expire the Message-Id's.
+Example:  no-dupes-forever = yes
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{ERROR HANDLING}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+error-include-queue & boolean & GVL & Should error reports contain the queue associated with that run
+Example:  error-include-queue = yes
+
+Default value is true\\
+\hline
+\multicolumn{4}{l}{FILEARCHIVE}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+file-archive-dir & string & GVL & Where are the archives for the list located.
+Example: file-archive-dir = files\\
+\hline
+file-archive-status & choice & GVL & Who is allowed to retrieve the file archives.
+Example: file-archive-status = admin
+
+Default value is public\\
+\hline
+\multicolumn{4}{l}{FILES}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+blacklist-mask & string & GVL & Per-list file containing regular expressions for users who are not allowed to subscribe to the list.
+Example:  blacklist-mask = blacklist
+
+Default value is blacklist\\
+\hline
+blacklist-reject-file & string & GVL & File sent to a user when their subscription or post is rejected because they are blacklisted.
+Example:   blacklist-reject-file = text/blacklist.txt
+
+Default value is text/blacklist.txt\\
+\hline
+closed-file & string & GVL & File sent to message author when the post is rejected because the list is closed.
+Example:  closed-file = text/closed-post.txt
+
+Default value is text/closed-post.txt\\
+\hline
+closed-subscribe-file & string & GVL & Filename of file to be sent if a user tries to subscribe to a closed subscription list.
+Example:  closed-subscribe-file = text/closed-subscribe.txt
+
+Default value is text/closed-subscribe.txt\\
+\hline
+faq-file & string & GVL & File on disk containing the list's FAQ file.
+Example:  faq-file = text/faq.txt
+
+Default value is text/faq.txt\\
+\hline
+footer-file & string & GVL & Text to append to list messages.
+Example:  footer-file = text/footer.txt
+
+Default value is text/footer.txt\\
+\hline
+global-blacklist & string & GV & Global file containing regular expressions for users who are not allowed to subscribe to lists hosted on this server.
+Example:  global-blacklist = banned
+
+Default value is banned\\
+\hline
+goodbye-file & string & GVL & File sent to someone unsubscribing from a list.
+Example:  goodbye-file = text/goodbye.txt
+
+Default value is text/goodbye.txt\\
+\hline
+header-file & string & GVL & Text to prepend to list messages.
+Example:  header-file = text/header.txt
+
+Default value is text/header.txt\\
+\hline
+info-file & string & GVL & File on disk containing the list's info file.
+Example:  info-file = text/info.txt
+
+Default value is text/info.txt\\
+\hline
+moderator-welcome-file & string & GVL & File sent to a new moderator when they set MODERATOR.
+Example:  moderator-welcome-file = text/moderator.txt
+
+Default value is text/moderator.txt\\
+\hline
+no-command-file & string & GV & This is a global file to send if a message to the main listserver or request address has no commands.
+Example:  no-command-file = helpfile
+
+Default value is ecartis.hlp\\
+\hline
+nopost-file & string & GVL & File sent to users flagged NOPOST if they submit a post to the list
+Example:  nopost-file = text/nopost.txt
+
+Default value is text/nopost.txt\\
+\hline
+outside-file & string & GVL & File sent to message author when post is accepted to list but author is not a subscriber.
+Example:  outside-file = text/outside.txt
+
+Default value is text/outside.txt\\
+\hline
+overquote-file & string & GVL & Filename under the list directory of the file sent to a user who fails an overquoting check. (See 'quoting-limit'.) This is the file retrieved with 'getconf overquote'.
+Example:  overquote-file = text/overquote.txt
+
+Default value is text/overquote.txt\\
+\hline
+per-user-footer-file & string & GVL & Filename of the per-user footer file.
+Example:  per-user-footer-file = per-user/footer.txt
+
+Default value is text/peruser-footer.txt\\
+\hline
+posting-acl-file & string & GVL & The filename within the list directory to use for the posting-acl file.
+Example:  posting-acl-file = postacl
+
+Default value is postacl\\
+\hline
+submodes-file & string & GVL & File containing list specific customized subscription modes.
+Example:  submodes-file = submodes
+
+Default value is submodes\\
+\hline
+subscribe-acl-file & string & GVL & File containing regular expressions against which a user's address will be matched when they try to subscribe to a list. If an address does not match at least one, subscription is denied. Can be gotten with 'getconf acl'.
+Example:  subscribe-acl-file = subscribe-acl
+
+Default value is subscribe-acl\\
+\hline
+subscribe-acl-text-file & string & GVL & Textfile to be sent to a user who fails the ACL subscription check. Can be gotten with 'getconf acl-text'.
+Example:  subscribe-acl-text-file = text/subscribe-acl-deny.txt
+
+Default value is text/subscribe-acl-deny.txt\\
+\hline
+tempban-end-file & string & GVL & Filename of file to be sent to a user who was tempbanned when the tempban expires.
+Example:  tempban-end-file = text/tempban-end.txt
+
+Default value is text/tempban-end.txt\\
+\hline
+tempban-file & string & GVL & Filename of file to be sent to a user when an admin issues the tempban command on them.
+Example:  tempban-file = text/tempban.txt
+
+Default value is text/tempban.txt\\
+\hline
+welcome-file & string & GVL & File sent to new subscribers of a list.
+Example:  welcome-file = text/intro.txt
+
+Default value is text/intro.txt\\
+\hline
+\multicolumn{4}{l}{HEADERS}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+strip-headers & string & GVL & A colon seperated list of headers to remove from outgoing messages.
+Example:  strip-headers = X-pmrq:X-Reciept-To\\
+\hline
+strip-mdn & boolean & GVL & If true, strip all read-reciept (mail delivery notification) headers
+from mail before sending out. Example:  strip-mdn = on
+
+Default value is true\\
+\hline
+\multicolumn{4}{l}{LIST INTEGRATION}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+cc-lists & string & L & A colon seperated list of local lists which recieve copies of all posts to this list.
+Example:  cc-lists = mylist1:mylist2
+
+Default value is \\
+\hline
+union-lists & boolean & L & A colon seperated list of local lists whose members can post to this list even if it is closed.
+Example:  union-lists = mylist1:mylist2\\
+\hline
+\multicolumn{4}{l}{LISTARCHIVE}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+archive-world-readable & boolean & GVL & Should we make all archive files world-readable?
+Example:  archive-world-readable = yes
+
+Default value is true\\
+\hline
+mbox-archive-path & string & GVL & Path to where MBox format archives are stored.
+Example:  mbox-archive-path = archives/mylist/mbox\\
+\hline
+mh-archive-path & string & GVL & Path to where MH format archives are stored.
+Example:  mh-archive-path = archives/mylist/mh\\
+\hline
+\multicolumn{4}{l}{LOCATION}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+lists-root & string & GV & Location of the directory containing all the list info.
+Example:  lists-root = lists
+
+Default value is \textless\$listserver-data\textgreater/lists\\
+\hline
+listserver-conf & string & G & The path to the listserver configuration files.
+Example: listserver-conf = /usr/local/mylists/configs\\
+\hline
+listserver-data & string & GV & The path to the listserver data root.
+Example: listserver-data = /usr/local/mylists/data\\
+\hline
+listserver-modules & string & G & The path to the directory containing the LPM modules.
+Example:  listserver-modules = /usr/local/lists/modules\\
+\hline
+listserver-root & string & G & The path to the root of the Listserver installation
+Example: listserver-root = /usr/local/listserver\\
+\hline
+\multicolumn{4}{l}{MAINTENANCE}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+listserver-bin-dir & string & G & When creating a new list, what directory do we prepend to
+the binary name when we make the aliases (if not set, defaults to the path the binary was run with).
+Example: listserver-bin-dir = /home/list\\
+\hline
+newlist-qmail & boolean & G & When creating a new list, do we need to make dot-qmail aliases?
+Example: newlist-qmail = no
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{MIME}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+humanize-html & boolean & GVL & Should HTML attachments be converted to plaintext
+Example:  humanize-html = no
+
+Default value is true\\
+\hline
+humanize-mime & boolean & GVL & Should the server strip out non-text MIME attachments.
+Example: humanize-mime = true
+
+Default value is true\\
+\hline
+humanize-quotedprintable & boolean & GVL & If set to true, attempt to remove any and all quoted
+printable characters from subject and body replacing them with their actual character. Example: humanize-quotedprintable = true
+
+Default value is false\\
+\hline
+pantomime-dir & string & GVL & Directory on disk to store binary files placed on the web via PantoMIME.
+Example:  pantomime-dir = /var/www/ecartis/html/pantomime\\
+\hline
+pantomime-url & string & GVL & URL corresponding to pantomime-dir
+Example:  pantomime-url = http://www.ecartis.net/pantomime\\
+\hline
+rabid-mime & boolean & GVL & Should ABSOLUTELY no attachments, EVEN text/plain, be allowed
+Example:  rabid-mime = no
+
+Default value is false\\
+\hline
+unmime-forceweb & boolean & GVL & Should all attachments (even text/plain) be forced to the
+web (pantomime-dir and pantomime-url must be set or all will be eaten)
+Example:  unmime-forceweb = yes
+
+Default value is false\\
+\hline
+unmime-quiet & boolean & GVL & Should the listserver report when it strips MIME attachments.
+Example: unmime-quiet = no
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{MISC}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+assume-lists-valid & boolean & GV & Should we assume that all list directories are valid or should we perform checks
+Example: assume-lists-valid = yes
+
+Default value is false\\
+\hline
+closed-post & boolean & GVL & Is this list closed to posting from non-members.
+Example: closed-post = true
+
+Default value is false\\
+\hline
+closed-post-blackhole & boolean & GVL & Do messages submitted to a closed-post list by non-members get thrown away.
+Example: closed-post-blackhole = yes
+
+Default value is false\\
+\hline
+closed-post-subject & string & GVL & A customized subject for closed-post rejection mails.
+Example: closed-post-subject = The List Is Closed\\
+\hline
+copy-requests-to & string & GVL & If set, all user request results will be sent to this address. Useful for debugging.
+Example:
+  copy-requests-to = \textless\$list\textgreater-admins@\textless\$hostname\textgreater\\
+\hline
+enforced-address-blackhole & boolean & GVL & If this is true and enforced-addressing-to is enabled,
+posts that fail the check will be simply eaten. Otherwise, they will be marked for moderation.
+Example: enforced-address-blackhole = true
+
+Default value is false\\
+\hline
+enforced-addressing-to & string & GVL & If this is set, this address must be in the To or Cc
+field of a post to the list. Usually, you would set the list address here.
+Example: enforced-addressing-to = mylist@foo.bar.com\\
+\hline
+force-from-address & string & GVL & If specified, this will be used as the RFC 822 From: address.
+Example:  force-from-address = list-admins@myhost.dom\\
+\hline
+form-show-listname & boolean & GVL & Should we use the list name (or RFC2369 name) instead
+of the listserver full name for forms on a per-list basis? (Like admin wrappers and such.)
+Example:  form-show-listname = yes
+
+Default value is false\\
+\hline
+posting-acl & boolean & GVL & Should we check the postacl file if it exists?
+Example:  posting-acl = true
+
+Default value is true\\
+\hline
+precedence & string & GVL & The precedence header which will be included in all traffic to the list.
+Example: precedence = bulk
+
+Default value is bulk\\
+\hline
+reply-to-sender & boolean & GVL & Forcibly set the Reply-To: header to be the address the mail came from.
+Example: reply-to-sender = false
+
+Default value is false\\
+\hline
+tag-to-front & boolean & GVL & If set to true and there is a subject tag for the list, it will be
+removed and moved to the beginning of the line (before any 'Re:'s). If not set, any duplicate Re:'s will
+still be removed, and the subject-tag will be moved after the Re:.
+Example:  tag-to-front = no
+
+Default value is true\\
+\hline
+who-status & choice & GVL & Who is allowed to view the list membership.
+Example:  who-status = admin
+
+Default value is private\\
+\hline
+\multicolumn{4}{l}{MODERATION}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+admin-approvepost & boolean & GVL & Are posts by an administrator to a moderated list automatically approved.
+Example: admin-approvepost = false
+
+Default value is true\\
+\hline
+moderate-include-queue & boolean & GVL & Should moderated messages contain the full message that triggered moderation?
+Example: moderate-include-queue = yes
+
+Default value is false\\
+\hline
+moderate-notify-nonsub & boolean & GVL & Should posts from non-subscribers be acked if they are moderated.
+Example: moderate-notify-nonsub = true
+
+Default value is false\\
+\hline
+moderated & boolean & GVL & Is this list moderated.
+Example:  moderated = yes
+
+Default value is false\\
+\hline
+moderator & string & GVL & Address for the list moderator(s).
+Example:  moderator = foolist-moderators@hostname.dom\\
+\hline
+moderator-approvepost & boolean & GVL & Are posts by a moderator to a moderated list automatically approved.
+Example: moderator-approvepost = false
+
+Default value is true\\
+\hline
+password-failure-blackhole & boolean & GVL & If true, a post to a password list that doesn't have
+the correct password will be eaten. If false, it will be sent to the moderators.
+Example:  password-failure-blackhole = yes
+
+Default value is true\\
+\hline
+password-implies-approved & boolean & GVL & If true, a correct use of X-posting-pass automatically
+preapproves the message. Useful if you want to have a moderated list and allow preapproved functionality through the use of the password.
+Example:  password-implies-approved = yes
+
+Default value is false\\
+\hline
+post-password & string & GVL & If specified, all incoming messages must have an X-posting-pass: header with this password in it.
+Example:  post-password = NeverBeGuessed\\
+\hline
+post-password-reject-file & string & GVL & File sent to submitters to a password protected list if they don't include the posting password header.
+Example:  post-password-reject-file = text/postpassword.txt
+
+Default value is text/postpassword.txt\\
+\hline
+subject-required & boolean & GVL & If set to true, then any post sent to the list without a subject will be made moderated.
+Example: subject-required = yes
+
+Default value is false\\
+\hline
+verbose-moderate-fail & boolean & GVL & When a moderator approves a message but it is rejected, should the message
+in question be included in the rejection note?
+Example: verbose-moderate-fail = yes
+
+Default value is true\\
+\hline
+\multicolumn{4}{l}{PASSWORD}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+allow-site-passwords & boolean & GV & Are sitewide passwords allowed.
+Example: allow=site-passwords = false
+
+Default value is false\\
+\hline
+password-expiration-time & duration & GV & How quickly to auth-password cookies expire.
+Example:  password-expiration-time = 2 d
+
+Default value is 1 h\\
+\hline
+\multicolumn{4}{l}{PER-USER}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+per-user-rewrite-to & boolean & GVL & Should the To: field be rewritten for each user on the list?
+Example:  per-user-rewrite-to = true
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{POSTING LIMITS}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+body-max-size & integer & GVL & Posts with a body larger than this in bytes will be moderated.
+Example: body-max-size = 10000\\
+\hline
+header-max-size & integer & GVL & Posts with headers larger than this in bytes will be moderated.
+Example: header-max-size = 2000\\
+\hline
+\multicolumn{4}{l}{QUOTING}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+quoting-limits & boolen & GVL & If true, posts to the list will be checked for overquoting.
+Example: quoting-limits = yes
+
+Default value is false\\
+\hline
+quoting-line-reset & boolean & GVL & If quoting-limits is on, should the count of quoted lines be reset if the user places their own text in the message? (This has the effect of making it so that quoting-max-lines is the total number of lines that can be quoted at once IN A BLOCK, instead of in the entire message.)
+Example: quoting-line-reset = yes
+
+Default value is true\\
+\hline
+quoting-max-lines & integer & GVL & If greater than 0 and quoting-limits is true, this is the maximum number of lines allowed to be quoted from a previous message.
+Example: quoting-max-lines = 10
+
+Default value is 10\\
+\hline
+quoting-max-percent & integer & GVL & If greater than 0 and quoting-limits is true, this is the maximum percent of the message allowed to be quoted from a previous post.  Example: quoting-max-percent = 15
+
+Default value is 0\\
+quoting-tolerance-lines & integer & GVL & If greater than 0, this is the number of lines that must be exceeded in the total message before the quoting percentage limit will be applied. It would be silly to have a 25\% quoting limit and have a three-line message be rejected because two lines were quoted.
+Example: quoting-tolerance-lines = 7
+
+Default value is 7\\
+\hline
+\multicolumn{4}{l}{RFC2369}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+rfc2369-archive-url & string & GVL & The URL for use in the List-archive: RFC 2369 header.
+Example: rfc2369-archive-url = ftp://ftp.myhost.dom/lists\\
+\hline
+rfc2369-headers & boolean & GVL & Should RFC 2369 headers be enabled for this list.
+Example: rfc2369-headers = on
+
+Default value is false\\
+\hline
+rfc2369-legacy-listid & boolean & GVL & Add older X-List-ID headers, for backwards compatibility.
+Example: rfc2369-legacy-listid = false
+
+Default value is true\\
+\hline
+rfc2369-list-help & string & GVL & URL to use in the RFC 2369 List-help: header.
+Example: rfc2369-list-help = http://www.mydom.com/list/help.html\\
+\hline
+rfc2369-listname & string & GVL & The name of the list to use in the RFC 2369 List-name: header.
+Example: rfc2369-listname = Mylist\\
+\hline
+rfc2369-minimal & boolean & GVL & Should only the minimal set of RFC 2369 headers be emitted.
+Example: rfc2369-minimal = true
+
+Default value is false\\
+\hline
+rfc2369-post-address & string & GVL & The mailto to be used in the RFC 2369 List-post: header.
+The special value of 'closed' will show the list as closed in that header.
+Example: rfc2369-post-address = myname@myhost.dom\\
+\hline
+rfc2369-subscribe & string & GVL & f specified, this overrides the default generated RFC2369 List-subscribe value.
+Example: rfc2369-subscribe = mailto:ecartis@ecartis.net?subject=subscribe\%20ecartis-support\\
+\hline
+rfc2369-unsubscribe & string & GVL & If specified, this overrides the default generated RFC2369 List-unsubscribe value.
+Example: rfc2369-unsubscribe = mailto:ecartis@ecartis.net?subject=unsubscribe\%20ecartis-support\\
+\hline
+use-rfc2919-listid-subdomain & string & GVL & Instead of the 'pure' RFC2369 List-ID field, use the suggested
+'list-id' subdomain addition from RFC2919 (the successor to RFC2369)
+Example:  use-rfc2919-listid-subdomain = true
+
+Default value is false\\
+\hline
+\multicolumn{4}{l}{SMTP}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+form-cc-address & string & GVL & Who should be cc'd on any tasks/forms that the server sends.
+Example: form-cc-address = user2@host1.dom\\
+\hline
+full-bounce & boolean & GVL & Should bounces contain the full message or only the headers.
+Example: full-bounce = false
+
+Default value is false\\
+\hline
+mailserver & string & GV & The name of the outging SMTP server to use.
+Example: mailserver = mail.host1.dom
+
+Default value is localhost\\
+\hline
+max-rcpt-tries & integer & GV & How many times to attempt reading a RCPT TO: response.
+Example: max-recpt-tries = 3
+
+Default value is 5\\
+\hline
+send-as & string & GVL & Controls what the SMTP return path is set to.
+Example: send-as = list2-bounce@test2.dom\\
+\hline
+sendmail-sleep & boolean & GV & Should we attempt to sleep a short time between message recipients.
+Example: sendmail-sleep = on
+
+Default value is false\\
+\hline
+sendmail-sleep-length & duration & GV & Override if you need the 'Sendmail Sleeper' option at a different
+duration than the 3 second default. Example:  sendmail-sleep-length = 1 s
+
+Default value is 3 s\\
+\hline
+smtp-blind-blast & boolean & GV & Should Ecartis perform all SMTP operations without regard for result
+codes (e.g. trust that it was delivered)? NOT RECOMMENDED.
+Example: smtp-blind-blast = yes
+
+Default value is false\\
+\hline
+smtp-queue-chunk & integer & GVL & Maximum recipients per message submitted to the mail server. Larger lists will be split into chunks of this size.
+Example: smtp-queue-chunk = 25\\
+\hline
+smtp-retry-forever & boolean & GV & Should Ecartis continue to wait for SMTP responses for an infinite amount of time, e.g. never give up? This can negatively impact delivery times. Example: smtp-retry-forever = yes
+
+Default value is false\\
+\hline
+smtp-socket & integer & GV & Which socket should the SMTP server be contacted on.
+Example: smtp-socket = 26
+
+Default value is 25\\
+\hline
+\multicolumn{4}{l}{SUBSCRIBE OPTIONS}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+an-sildmient-subscribe & boolean & GVL & If set true, when an admin subscribes a user to a list they
+will receive no subscription notification AND no welcome message.
+Example: admin-silent-subscribe = no
+
+Default value is false\\
+\hline
+
+
+
+\end{longtable}
+
+
 \end{document}
+
