@@ -2,7 +2,7 @@ Package: Ecartis-cgi
 Version: 1.0.2
 Section: mail
 Priority: extra
-Architecture: any
+Architecture: amd64
 Depends: ecartis, apache | httpd
 Conflicts: listar, listar-cgi
 Source: https://github.com/d-graef/ecartis/archive/master.zip
