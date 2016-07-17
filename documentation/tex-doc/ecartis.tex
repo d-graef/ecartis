@@ -1974,11 +1974,171 @@ Example: admin-silent-subscribe = no
 
 Default value is false\\
 \hline
+admin-subscribe-notice & choice & GVL & Notifications sent when an administrator (ADMIN) adds a subscriber.
+The value of 'all' will send both the notification and welcome text (if configured) to the subscriber. The
+'silent' option will send neither. Example:  admin-subscribe-notice = welcome
 
+Default value is all\\
+\hline
+admin-unsubscribe-notice & choice & GVL & Notifications sent when an administrator (ADMIN) removes a subscriber.
+The value of 'all' will send both the notification and goodbye text (if configured) to the subscriber. The
+'silent' option will send neither. Example:  admin-unsubscribe-notice = goodbye
 
+Default value is all\\
+\hline
+administrivia-include-requests & boolean & GVL & Should the mail which caused the (un)subscription action
+be included in the message to the administrivia address. Example: administrivia-include-requests = on
 
+Default value is false\\
+\hline
+goodbye-subject & string & GVL & Subject to be used in the mail sent if someone unsubscribes off a list.
+Example: goodbye-subject = You have signed off '\textless\$list\textgreater'
+
+Default value is You have signed off '\textless\$list\textgreater'\\
+\hline
+no-administrivia & boolean & GVL & Should the administrivia address be notified when a user subscribes or unsubscribes.
+Example: no-administrivia = on
+
+Default value is false\\
+\hline
+owner-fallback & boolean & GVL & Should the list-owner be used if administrivia-address is not defined when
+notifying of (un)subscribes. Example: owner-fallback = true
+
+Default value is false\\
+\hline
+prevent-second-message & boolean & GVL & If set 'true', then when someone tries to subscribe or unsubscribe
+to an Ecartis list and no other commands are given, the 'Ecartis command results' message will not be sent.
+Example: prevent-second-message = true
+
+Default value is false\\
+\hline
+silent-resubscribe & boolean & GVL & Silence warnings when an already-subscribed user re-subscribes.
+Example: silent-resubscribe = on
+
+Default value is false\\
+\hline
+subscribe-confirm-file & string & GVL & File sent to someone subscribing to a list, if subscribe-mode = confirm.
+Example: subscribe-confirm-file = text/subscribe-confirm.txt
+
+Default value is text/subscribe-confirm.txt\\
+\hline
+subscribe-confirm-subject & string & GVL & Subject to be used in the mail sent to someone subscribing to a list, if subscribe-mode = confirm.
+Example: subscribe-confirm-subject = Subscription confirmation for '\textless\$list\textgreater'
+
+Default value is Subscription confirmation for '\textless\$list\textgreater'\\
+\hline
+subscribe-mode & choice & GVL & Subscription mode for the list.
+Example: subscribe-mode = open
+
+Default value is closed\\
+\hline
+subscription-acl & boolean & GVL & If 'true' and the file given in 'subscribe-acl-file' exists,
+a subscription access list check will be performed when users attempt to subscribe to the list.
+Example: subscription-acl = true
+
+Default value is true\\
+\hline
+unsubscribe-confirm-file & string & GVL & File sent to someone unsubscribing from a list, if unsubscribe-mode = confirm.
+Example: unsubscribe-confirm-file = text/unsubscribe-confirm.txt
+
+Default value is text/unsubscribe-confirm.txt\\
+\hline
+unsubscribe-confirm-subject & string & GVL & Subject to be used in the mail sent to someone unsubscribing from a list,
+if unsubscribe-mode = confirm. Example: unsubscribe-confirm-subject = Unsubscription confirmation for '\textless\$list\textgreater'
+
+Default value is Unsubscription confirmation for '\textless\$list\textgreater'\\
+\hline
+unsubscribe-mode & choice & GVL & Unsubscription mode for the list.
+Example: unsubscribe-mode = closed
+
+Default value is open\\
+\hline
+welcome-subject & string & GVL & Subject to be used in the mail sent to new subscribers of a list.
+Example: welcome-subject = Welcome to list '\textless\$list\textgreater'
+
+Default value is Welcome to list '\textless\$list\textgreater'\\
+\hline
+\multicolumn{4}{l}{TEMPBAN}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+tempban-default-duration & duration & GVL & If an administrator issues the tempban command without
+a duration, this default will be used.
+Example: tempban-default-duration = 7 d
+
+Default value is 7 d\\
+\hline
+\multicolumn{4}{l}{TIMEOUTS}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+adminreq-expiration-time & duration & GVL & How long until administrative request cookies expire.
+Example: adminreq-expiration-time = 3 h\\
+\hline
+cookie-expiration-time & duration & GVL & How long until a generated cookie expires.
+Example: cookie-expiration-time = 3 d 6 h
+
+Default value is 1 d\\
+\hline
+filereq-expiration-time & duration & GVL & How long until config file request cookies expire.
+Example: filereq-expiration-time = 3 h\\
+\hline
+modpost-expiration-time & duration & GVL & How long until a moderated post cookie expires.
+Example: modpost-expiration-time = 2 h\\
+\hline
+reply-expires-time & duration & GV & How long until an automatic reply expires from the mailbox
+Example: reply-expires-time = 3 h
+
+Default value is 1 d\\
+\hline
+subscription-expiration-time & duration & GV & How long until subscription verification cookies expire.
+Example: subscription-expiration-time = 5 d\\
+\hline
+unsubscription-expiration-time & duration & GV & How long until unsubscription verification cookies expire.
+Example: unsubscription-expiration-time = 5 d \\
+\hline
+\multicolumn{4}{l}{TOLIST}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+megalist & boolean & GVL & Should we process this list on-disk instead of in memory? This disables the
+receipient list sorting and list-merging functionality of Ecartis, in order to prevent large memory
+footprint operations. It is useful for lists where the receipient list is too large to effectively do
+memory-based operations on. Example: megalist = true
+
+Default value is false \\
+\hline
+no-loose-domain-match & boolean & GVL & Should the server treat users of a subdomain as users of
+the domain for validation purposes. Example: no-loose-domain-match = on
+
+Default value is false \\
+\hline
+per-user-modifications & boolean & GVL & Do we do per-user processing for list members.
+Example: per-user-modifications = false
+
+Default value is false \\
+\hline
+sort-tolist & boolean & GVL & Should the recipients be sorted by domain before sending. This
+is memory expensive and is a bad idea if your SMTP server already does this sorting. If you SMTP
+server doesn't do this, it can really improve outgoing mail performance.
+Example: sort-tolist = off
+
+Default value is true \\
+\hline
+tolist-send-pause & integer & GVL & How long (in milliseconds) do we sleep between SMTP chunks.
+Example: tolist-send-pause = 30
+
+Default value is 0 \\
+\hline
+\multicolumn{4}{l}{VACATION}\\
+\hline
+Variable & Type & Valid & Description\\
+\hline
+vacation-default-duration & duration & GVL & If a person sends the vacation command without a
+duration, how long they will be set vacation. Example: vacation-default-duration
+
+Default value is 14 d \\
+\hline
 \end{longtable}
-
-
 \end{document}
 
