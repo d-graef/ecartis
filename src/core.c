@@ -1233,12 +1233,12 @@ int flagged_send_textfile(const char *fromaddy, const char *list,
 
     if(!smtp_body_start())
         return 0;
-	if(get_var("hostname")) {
+    if(get_var("hostname")) {
 		buffer_printf(hostname, sizeof(hostname) - 1, "%s", get_string("hostname"));
-	} else {
+    } else {
 		memset(hostname, 0, sizeof(hostname));
 		build_hostname(hostname, sizeof(hostname));
-	}
+    }
     buffer_printf(buffer, sizeof(buffer) - 1, "Received: with %s (v%s); %s", SERVICE_NAME_MC,
             VER_PRODUCTVERSION_STR, datestr);
     smtp_body_line(buffer);

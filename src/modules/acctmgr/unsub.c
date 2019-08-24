@@ -207,28 +207,28 @@ HOOK_HANDLER(hook_preunsub_confirm)
        if(!LMAPI->task_heading(fromaddy))
            return HOOK_RESULT_FAIL;
 
-	   if(LMAPI->get_var("unsubscribe-confirm-file")) {
-		   FILE *infile;
-		   char tempfilename[BIG_BUF]; /* Changed from SMALL_BUF to BIG_BUF due to listdir_file */
-		   LMAPI->listdir_file(tempfilename, LMAPI->get_string("list"),
-				   LMAPI->get_string("unsubscribe-confirm-file"));
+       if(LMAPI->get_var("unsubscribe-confirm-file")) {
+	   FILE *infile;
+	   char tempfilename[BIG_BUF]; /* Changed from SMALL_BUF to BIG_BUF due to listdir_file */
+	   LMAPI->listdir_file(tempfilename, LMAPI->get_string("list"),
+			   LMAPI->get_string("unsubscribe-confirm-file"));
 
-		   if((infile = LMAPI->open_file(tempfilename, "r")) != NULL) {
-			   char inputbuffer[BIG_BUF];
-			   char linebuffer[BIG_BUF];
+	   if((infile = LMAPI->open_file(tempfilename, "r")) != NULL) {
+		   char inputbuffer[BIG_BUF];
+		   char linebuffer[BIG_BUF];
 
-			   LMAPI->smtp_body_line("# ");
-			   while(LMAPI->read_file(inputbuffer, sizeof(inputbuffer), infile)) {
-				   LMAPI->buffer_printf(linebuffer, sizeof(linebuffer) - 1, "# %s",
-						   inputbuffer);
-				   LMAPI->smtp_body_text(linebuffer);
-			   }
-			   LMAPI->smtp_body_line("# ");
-			   LMAPI->close_file(infile);
-
-			   unsub_confirm_file_included = 1;
+		   LMAPI->smtp_body_line("# ");
+		   while(LMAPI->read_file(inputbuffer, sizeof(inputbuffer), infile)) {
+			   LMAPI->buffer_printf(linebuffer, sizeof(linebuffer) - 1, "# %s",
+					   inputbuffer);
+			   LMAPI->smtp_body_text(linebuffer);
 		   }
+		   LMAPI->smtp_body_line("# ");
+		   LMAPI->close_file(infile);
+
+		   unsub_confirm_file_included = 1;
 	   }
+       }
 	   if(!unsub_confirm_file_included) {
 		   LMAPI->smtp_body_text("# ");
 		   LMAPI->smtp_body_text(LMAPI->get_string("fromaddress"));
